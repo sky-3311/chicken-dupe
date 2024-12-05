@@ -90,6 +90,12 @@ public final class PigeonChickenDupe extends JavaPlugin implements Listener {
             // 如果鸡已经成年
             if (chicken.isAdult()) {
                 Player player = event.getPlayer();
+                if (!player.hasPermission("copy.use")) {
+                // 如果没有权限，取消事件并发送消息
+                player.sendMessage(ChatColor.RED + "你没有权限执行这个操作。");
+                event.setCancelled(true);
+                return;
+                }
                 ItemStack item = player.getInventory().getItemInMainHand();
                 Material material = item.getType();
                 if (material != Material.AIR) {
